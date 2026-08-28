@@ -1,0 +1,1866 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
+    <title>Windows 11 Privacy Guide: Reduce Tracking and Telemetry</title>
+
+    <meta name="description"
+          content="Improve Windows 11 privacy by reducing telemetry,
+          removing unwanted apps, limiting cloud features and blocking
+          selected Microsoft tracking domains.">
+
+    <meta name="robots"
+          content="index, follow, max-image-preview:large,
+          max-snippet:-1, max-video-preview:-1">
+
+    <meta name="theme-color" content="#101827">
+    <meta name="color-scheme" content="dark light">
+
+    <link rel="canonical" href="/">
+
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="en_GB">
+    <meta property="og:title"
+          content="Windows 11 Privacy Guide: Reduce Tracking and Telemetry">
+    <meta property="og:description"
+          content="A practical guide to reducing Windows 11 telemetry,
+          unwanted cloud features, advertising and Microsoft tracking.">
+    <meta property="og:url" content="/">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title"
+          content="Windows 11 Privacy Guide">
+    <meta name="twitter:description"
+          content="Reduce telemetry, remove unwanted apps and limit
+          Microsoft tracking in Windows 11.">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "TechArticle",
+        "headline": "Windows 11 Privacy Guide: Reduce Tracking and Telemetry",
+        "description": "A practical guide to improving privacy in Windows 11 by reducing telemetry, removing unwanted applications, limiting cloud features and blocking selected Microsoft domains.",
+        "inLanguage": "en-GB",
+        "datePublished": "2026-08-28",
+        "dateModified": "2026-08-28",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "/"
+        },
+        "author": {
+            "@type": "Organization",
+            "name": "Windows Privacy Guide"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Windows Privacy Guide"
+        },
+        "about": [
+            "Windows 11 privacy",
+            "Microsoft telemetry",
+            "Windows hosts file",
+            "Microsoft tracking",
+            "Windows bloatware"
+        ]
+    }
+    </script>
+
+    <style>
+        :root {
+            --background: #0b1120;
+            --surface: #111a2d;
+            --surface-light: #17233a;
+            --text: #e8edf5;
+            --muted: #aeb9cc;
+            --border: #2a3954;
+            --accent: #67b7ff;
+            --accent-dark: #2188e8;
+            --success: #67d5a2;
+            --warning: #f4ca64;
+            --danger: #ff8d8d;
+            --code: #080d18;
+            --shadow: 0 18px 50px rgba(0, 0, 0, 0.24);
+            --radius: 14px;
+            --content-width: 920px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behaviour: smooth;
+        }
+
+        body {
+            margin: 0;
+            background:
+                radial-gradient(
+                    circle at top,
+                    rgba(34, 111, 178, 0.18),
+                    transparent 38rem
+                ),
+                var(--background);
+            color: var(--text);
+            font-family:
+                Inter, ui-sans-serif, system-ui, -apple-system,
+                BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 17px;
+            line-height: 1.72;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration-thickness: 0.08em;
+            text-underline-offset: 0.18em;
+        }
+
+        a:hover {
+            color: #9bd1ff;
+        }
+
+        code,
+        pre,
+        kbd {
+            font-family:
+                "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+        }
+
+        code {
+            padding: 0.12rem 0.34rem;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            background: var(--code);
+            color: #c7e4ff;
+            font-size: 0.92em;
+        }
+
+        pre {
+            max-height: 34rem;
+            margin: 1.25rem 0;
+            padding: 1.1rem;
+            overflow: auto;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--code);
+            color: #d8e8ff;
+            font-size: 0.84rem;
+            line-height: 1.55;
+            white-space: pre;
+        }
+
+        pre code {
+            padding: 0;
+            border: 0;
+            background: transparent;
+            color: inherit;
+        }
+
+        kbd {
+            padding: 0.14rem 0.4rem;
+            border: 1px solid #4d5d78;
+            border-bottom-width: 3px;
+            border-radius: 5px;
+            background: #19243a;
+            color: var(--text);
+            font-size: 0.88em;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -5rem;
+            left: 1rem;
+            z-index: 100;
+            padding: 0.7rem 1rem;
+            border-radius: 8px;
+            background: var(--accent);
+            color: #06111e;
+            font-weight: 700;
+        }
+
+        .skip-link:focus {
+            top: 1rem;
+        }
+
+        .site-header {
+            border-bottom: 1px solid var(--border);
+            background: rgba(11, 17, 32, 0.86);
+            backdrop-filter: blur(14px);
+        }
+
+        .hero {
+            width: min(var(--content-width), calc(100% - 2rem));
+            margin: 0 auto;
+            padding: 5rem 0 4rem;
+        }
+
+        .eyebrow {
+            margin: 0 0 0.8rem;
+            color: var(--success);
+            font-size: 0.82rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #f7f9fc;
+            line-height: 1.2;
+            text-wrap: balance;
+        }
+
+        h1 {
+            max-width: 850px;
+            margin: 0;
+            font-size: clamp(2.25rem, 6vw, 4.6rem);
+            letter-spacing: -0.045em;
+        }
+
+        h2 {
+            margin-top: 4.5rem;
+            padding-top: 1rem;
+            font-size: clamp(1.7rem, 4vw, 2.35rem);
+            letter-spacing: -0.025em;
+        }
+
+        h3 {
+            margin-top: 2.5rem;
+            font-size: 1.35rem;
+        }
+
+        .lead {
+            max-width: 760px;
+            margin: 1.5rem 0 0;
+            color: #c9d4e6;
+            font-size: clamp(1.08rem, 2.5vw, 1.28rem);
+        }
+
+        .meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1rem;
+            margin-top: 1.5rem;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        main {
+            width: min(var(--content-width), calc(100% - 2rem));
+            margin: 0 auto;
+            padding: 2rem 0 6rem;
+        }
+
+        p,
+        li {
+            color: var(--text);
+        }
+
+        li + li {
+            margin-top: 0.35rem;
+        }
+
+        .toc {
+            margin: 1rem 0 3rem;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--surface);
+            box-shadow: var(--shadow);
+        }
+
+        .toc h2 {
+            margin: 0 0 1rem;
+            padding: 0;
+            font-size: 1.35rem;
+        }
+
+        .toc ol {
+            margin: 0;
+            padding-left: 1.3rem;
+            columns: 2;
+            column-gap: 2.5rem;
+        }
+
+        .toc li {
+            break-inside: avoid;
+            margin-bottom: 0.4rem;
+        }
+
+        .notice {
+            margin: 1.7rem 0;
+            padding: 1.2rem 1.3rem;
+            border: 1px solid var(--border);
+            border-left: 5px solid var(--accent);
+            border-radius: 10px;
+            background: var(--surface);
+        }
+
+        .notice strong {
+            color: #fff;
+        }
+
+        .notice.warning {
+            border-left-color: var(--warning);
+        }
+
+        .notice.danger {
+            border-left-color: var(--danger);
+        }
+
+        .notice.success {
+            border-left-color: var(--success);
+        }
+
+        .path {
+            padding: 1rem 1.2rem;
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            background: var(--surface-light);
+            color: #eaf4ff;
+            font-weight: 700;
+        }
+
+        .level {
+            margin: 2rem 0;
+            padding: 1.4rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--surface);
+        }
+
+        .level h3 {
+            margin-top: 0;
+        }
+
+        .risk {
+            display: inline-block;
+            margin-bottom: 0.5rem;
+            padding: 0.25rem 0.58rem;
+            border-radius: 999px;
+            background: #203553;
+            color: #beddff;
+            font-size: 0.77rem;
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .risk.medium {
+            background: #493d20;
+            color: #ffe397;
+        }
+
+        .risk.high {
+            background: #4c252b;
+            color: #ffb7bd;
+        }
+
+        .button-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            margin: 1rem 0;
+        }
+
+        button {
+            appearance: none;
+            padding: 0.68rem 0.9rem;
+            border: 1px solid #498fce;
+            border-radius: 8px;
+            background: var(--accent-dark);
+            color: #fff;
+            cursor: pointer;
+            font: inherit;
+            font-size: 0.9rem;
+            font-weight: 750;
+        }
+
+        button:hover {
+            background: #1476cd;
+        }
+
+        button:focus-visible,
+        a:focus-visible {
+            outline: 3px solid var(--warning);
+            outline-offset: 3px;
+        }
+
+        .copy-status {
+            min-height: 1.5rem;
+            color: var(--success);
+            font-size: 0.88rem;
+        }
+
+        .checklist {
+            padding-left: 1.3rem;
+        }
+
+        .checklist li::marker {
+            color: var(--success);
+        }
+
+        details {
+            margin: 1rem 0;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--surface);
+        }
+
+        summary {
+            padding: 1rem 1.2rem;
+            cursor: pointer;
+            color: #f4f7fb;
+            font-weight: 750;
+        }
+
+        details > div {
+            padding: 0 1.2rem 1.2rem;
+        }
+
+        .site-footer {
+            border-top: 1px solid var(--border);
+            background: #080d18;
+        }
+
+        .footer-inner {
+            width: min(var(--content-width), calc(100% - 2rem));
+            margin: 0 auto;
+            padding: 2.5rem 0;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .footer-inner p {
+            color: var(--muted);
+        }
+
+        @media (max-width: 700px) {
+            body {
+                font-size: 16px;
+            }
+
+            .hero {
+                padding: 3.5rem 0 3rem;
+            }
+
+            .toc ol {
+                columns: 1;
+            }
+
+            .level {
+                padding: 1rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behaviour: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                scroll-behaviour: auto !important;
+                transition: none !important;
+            }
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                color: #111;
+            }
+
+            .site-header,
+            .toc,
+            .button-row,
+            .copy-status,
+            .site-footer {
+                display: none;
+            }
+
+            main {
+                width: 100%;
+            }
+
+            p,
+            li,
+            h1,
+            h2,
+            h3 {
+                color: #111;
+            }
+
+            .level,
+            .notice,
+            pre {
+                border-color: #aaa;
+                background: #fff;
+                color: #111;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a class="skip-link" href="#main-content">
+        Skip to the guide
+    </a>
+
+    <header class="site-header">
+        <div class="hero">
+            <p class="eyebrow">Windows privacy and security</p>
+
+            <h1>
+                Windows 11 Privacy Guide: Reduce Telemetry,
+                Tracking and Unwanted Cloud Features
+            </h1>
+
+            <p class="lead">
+                A practical, staged approach to removing unwanted software,
+                limiting Microsoft's data collection and blocking selected
+                Windows endpoints without unnecessarily breaking essential
+                services.
+            </p>
+
+            <div class="meta">
+                <span>Updated: 28 August 2026</span>
+                <span>Reading time: approximately 25 minutes</span>
+                <span>Platform: Windows 11</span>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content">
+        <aside class="notice warning">
+            <strong>Important:</strong>
+            Some changes in this guide can reduce security or interfere with
+            Microsoft accounts, work-managed devices, Windows features and
+            third-party applications. Create a backup first, apply changes in
+            stages and test the functions you need after every stage.
+        </aside>
+
+        <nav class="toc" aria-label="Contents">
+            <h2>Contents</h2>
+            <ol>
+                <li><a href="#overview">Why Windows privacy is complicated</a></li>
+                <li><a href="#device-identifiers">Persistent device identifiers</a></li>
+                <li><a href="#browser">Choose a different primary browser</a></li>
+                <li><a href="#bloatware">Remove unwanted apps and suggestions</a></li>
+                <li><a href="#privacy-settings">Review privacy settings</a></li>
+                <li><a href="#local-account">Use a local account where possible</a></li>
+                <li><a href="#enterprise">Enterprise privacy controls</a></li>
+                <li><a href="#group-policy">Configure Group Policy</a></li>
+                <li><a href="#security-trade-offs">Security and privacy trade-offs</a></li>
+                <li><a href="#hosts-file">Block domains with the hosts file</a></li>
+                <li><a href="#block-lists">Staged Microsoft domain lists</a></li>
+                <li><a href="#testing">Test and reverse your changes</a></li>
+                <li><a href="#maintenance">Maintain your privacy configuration</a></li>
+            </ol>
+        </nav>
+
+        <article>
+            <section id="overview">
+                <h2>Why Windows privacy is complicated</h2>
+
+                <p>
+                    Windows has developed from a largely self-contained
+                    desktop operating system into a platform that depends
+                    heavily on internet-connected services.
+                </p>
+
+                <p>
+                    Some of those connections are necessary or beneficial.
+                    Windows uses the internet for security updates, malware
+                    definitions, activation, certificate checks, cloud
+                    storage, account synchronisation and services that the
+                    user has deliberately enabled.
+                </p>
+
+                <p>
+                    The difficulty is separating those useful connections
+                    from diagnostics, advertising, experimentation,
+                    personalised recommendations, cloud-delivered content,
+                    Bing integration, widgets, browser reporting, location
+                    services and other forms of data collection.
+                </p>
+
+                <p>
+                    Windows 11 provides numerous privacy controls, but they
+                    are distributed across several areas of Settings. More
+                    advanced options may require Group Policy, and feature
+                    updates can alter, reset or replace existing controls.
+                    Switching off one option may also address only a small
+                    part of a wider connected service.
+                </p>
+
+                <p>
+                    A Windows computer cannot realistically be made entirely
+                    private while it continues to use Microsoft services.
+                    Nevertheless, careful configuration can substantially
+                    reduce the information it sends.
+                </p>
+            </section>
+
+            <section id="device-identifiers">
+                <h2>Why persistent device identifiers deserve attention</h2>
+
+                <p>
+                    Public discussion about global or persistent device
+                    identifiers has highlighted an important privacy issue:
+                    separate events become easier to associate when they
+                    repeatedly contain an identifier linked to the same
+                    installation or physical device.
+                </p>
+
+                <p>
+                    Individual requests do not necessarily contain a person's
+                    real name. However, a stable identifier can make it
+                    possible to connect activity across different sessions,
+                    applications and Microsoft services.
+                </p>
+
+                <p>
+                    Windows communicates with endpoints associated with device
+                    registration, connected experiences, Microsoft accounts,
+                    Entra ID, activity synchronisation and deployment systems
+                    such as Windows Autopilot. Examples include:
+                </p>
+
+                <pre><code>dds.microsoft.com
+cs.dds.microsoft.com
+aad.cs.dds.microsoft.com
+fd.dds.microsoft.com
+ztd.dds.microsoft.com
+cdpcs.access.microsoft.com
+activity.windows.com
+assets.activity.windows.com
+edge.activity.windows.com</code></pre>
+
+                <p>
+                    A connection to one of these domains does not, by itself,
+                    prove that Microsoft is recording everything a user does.
+                    Several endpoints have legitimate enterprise,
+                    authentication and device-management purposes. Public
+                    documentation also does not describe every internal
+                    identifier or data flow in full.
+                </p>
+
+                <p>
+                    Even so, it is reasonable for a home user who does not use
+                    Entra ID, Autopilot, corporate management or cross-device
+                    synchronisation to question whether every device
+                    registration connection is required.
+                </p>
+
+                <aside class="notice danger">
+                    <strong>Do not begin by blocking device-registration
+                    endpoints.</strong>
+                    These are among the most disruptive domains in this guide.
+                    Blocking them can break work or school enrolment, Microsoft
+                    account features, device registration, Autopilot and
+                    connected experiences.
+                </aside>
+            </section>
+
+            <section id="browser">
+                <h2>Choose a different primary browser</h2>
+
+                <p>
+                    The browser is one of the simplest places to reduce routine
+                    data collection. Microsoft Edge is closely integrated with
+                    Microsoft's search, advertising, shopping, content,
+                    synchronisation and telemetry systems.
+                </p>
+
+                <p>
+                    Depending on its configuration, Edge may contact Microsoft
+                    for:
+                </p>
+
+                <ul>
+                    <li>Search and address-bar suggestions</li>
+                    <li>Browsing diagnostics and usage reports</li>
+                    <li>Website reputation and download checks</li>
+                    <li>Shopping recommendations and price tracking</li>
+                    <li>Personalised advertising</li>
+                    <li>Microsoft Rewards</li>
+                    <li>Copilot and sidebar services</li>
+                    <li>MSN feeds and new-tab content</li>
+                    <li>Account and settings synchronisation</li>
+                    <li>Cloud-based spelling and writing assistance</li>
+                </ul>
+
+                <h3>Brave</h3>
+
+                <p>
+                    Brave is a convenient alternative for users who require
+                    compatibility with Chromium-based websites and extensions.
+                    It blocks many common trackers by default and usually
+                    requires less initial configuration than a standard
+                    Chromium installation.
+                </p>
+
+                <p>
+                    Brave still has optional connected features. Review its
+                    settings and disable Rewards, sponsored images, usage
+                    reporting, promotional content and any other services you
+                    do not use.
+                </p>
+
+                <h3>Firefox</h3>
+
+                <p>
+                    Firefox is a suitable choice for anyone who wants to avoid
+                    relying entirely on the Chromium browser ecosystem. A
+                    privacy-focused Firefox configuration may include:
+                </p>
+
+                <ul>
+                    <li>Enhanced Tracking Protection set to Strict</li>
+                    <li>uBlock Origin installed and kept up to date</li>
+                    <li>HTTPS-Only Mode enabled</li>
+                    <li>Telemetry and studies disabled</li>
+                    <li>Sponsored suggestions switched off</li>
+                    <li>A trustworthy DNS-over-HTTPS provider</li>
+                    <li>Separate profiles for unrelated activities</li>
+                </ul>
+
+                <p>
+                    Neither browser provides anonymity. Websites can still
+                    identify or follow visitors through account logins,
+                    cookies, browser fingerprinting, IP addresses and
+                    analytics scripts. They simply provide a more independent
+                    starting point than a browser deeply integrated into
+                    Windows.
+                </p>
+            </section>
+
+            <section id="bloatware">
+                <h2>Remove unwanted apps, AI features and suggestions</h2>
+
+                <p>
+                    Windows 11 commonly includes applications, promotional
+                    shortcuts, online content and AI-related components that
+                    many users do not need.
+                </p>
+
+                <p class="path">
+                    Settings &gt; Apps &gt; Installed apps
+                </p>
+
+                <p>
+                    Examine the list and uninstall only the items you recognise
+                    and do not use. The available software varies according to
+                    the Windows edition, region, hardware manufacturer and
+                    installation date. Possible examples include:
+                </p>
+
+                <ul>
+                    <li>Clipchamp</li>
+                    <li>Copilot</li>
+                    <li>Dev Home</li>
+                    <li>Family</li>
+                    <li>Feedback Hub</li>
+                    <li>Get Help</li>
+                    <li>Microsoft 365 promotional applications</li>
+                    <li>Microsoft News</li>
+                    <li>Microsoft Teams for personal use</li>
+                    <li>Mixed Reality components</li>
+                    <li>Outlook for Windows</li>
+                    <li>Phone Link</li>
+                    <li>Solitaire</li>
+                    <li>Weather</li>
+                    <li>Widgets</li>
+                    <li>Xbox applications</li>
+                </ul>
+
+                <p>
+                    Open Taskbar settings and switch off Widgets, Copilot,
+                    Search highlights and any other internet-connected
+                    elements you do not want.
+                </p>
+
+                <p>
+                    If the computer supports Recall or other Copilot+ features,
+                    inspect their controls separately. Do not assume that an
+                    AI feature is inactive merely because you have never
+                    opened its application.
+                </p>
+
+                <p>
+                    Windows also displays recommendations in the Start menu,
+                    Settings, File Explorer, notifications and on the lock
+                    screen. Disable the following where your version of
+                    Windows provides the option:
+                </p>
+
+                <ul>
+                    <li>Account-related notifications</li>
+                    <li>Personalised offers</li>
+                    <li>Recommendations in Start</li>
+                    <li>Search highlights</li>
+                    <li>Suggested content in Settings</li>
+                    <li>Tailored experiences</li>
+                    <li>Tips and suggestions</li>
+                    <li>The Windows welcome experience</li>
+                    <li>Suggestions for getting more from Windows</li>
+                </ul>
+
+                <aside class="notice warning">
+                    <strong>Avoid indiscriminate debloating.</strong>
+                    Automated tools can remove WebView2, media codecs, Store
+                    dependencies, application installers and shared
+                    frameworks required by unrelated software. Make a few
+                    changes at a time, restart Windows and test your normal
+                    applications.
+                </aside>
+            </section>
+
+            <section id="privacy-settings">
+                <h2>Review every Privacy and security category</h2>
+
+                <p class="path">
+                    Settings &gt; Privacy &amp; security
+                </p>
+
+                <p>
+                    Microsoft changes the wording and position of privacy
+                    controls between Windows releases. Inspect every category
+                    rather than relying on an old list of menu paths.
+                </p>
+
+                <p>Important areas usually include:</p>
+
+                <ul>
+                    <li>Advertising ID</li>
+                    <li>Activity history</li>
+                    <li>App diagnostics</li>
+                    <li>Automatic file downloads</li>
+                    <li>Cloud content search</li>
+                    <li>Diagnostic data</li>
+                    <li>Feedback frequency</li>
+                    <li>Inking and typing personalisation</li>
+                    <li>Location</li>
+                    <li>Online speech recognition</li>
+                    <li>Personalised offers</li>
+                    <li>Search permissions</li>
+                    <li>Suggested content</li>
+                    <li>Tailored experiences</li>
+                </ul>
+
+                <p>
+                    Set diagnostic data to the lowest level available for your
+                    Windows edition. Disable optional diagnostics, tailored
+                    experiences, advertising personalisation, feedback
+                    requests, cloud search and typing personalisation if you
+                    do not need them.
+                </p>
+
+                <p class="path">
+                    Settings &gt; System &gt; Notifications &gt;
+                    Additional settings
+                </p>
+
+                <p>Consider disabling options that:</p>
+
+                <ul>
+                    <li>Show the Windows welcome experience after updates</li>
+                    <li>Suggest ways to get more from Windows</li>
+                    <li>Provide tips and suggestions while using Windows</li>
+                </ul>
+
+                <p>
+                    Review access to the camera, microphone, location,
+                    contacts, calendar, messages, account information and
+                    background activity. Applications should not receive
+                    permanent access to information or hardware they do not
+                    genuinely require.
+                </p>
+            </section>
+
+            <section id="local-account">
+                <h2>Use a local Windows account where possible</h2>
+
+                <p>
+                    A local account does not stop operating-system telemetry,
+                    but it weakens the direct connection between the Windows
+                    profile and a Microsoft identity.
+                </p>
+
+                <p>
+                    You can use a local Windows account and sign in separately
+                    to individual applications such as Microsoft 365, OneDrive
+                    or Xbox. This allows the operating system account to remain
+                    separate from email, cloud storage, subscriptions and
+                    other Microsoft services.
+                </p>
+
+                <p>
+                    Microsoft regularly changes the account options shown
+                    during Windows installation. If you intend to reinstall
+                    Windows, check the legitimate setup methods supported by
+                    your current release before beginning.
+                </p>
+            </section>
+
+            <section id="enterprise">
+                <h2>Consider Enterprise for stronger policy controls</h2>
+
+                <p>
+                    Windows Home and Pro do not provide the same range of
+                    diagnostic and policy controls as Windows Enterprise and
+                    Education.
+                </p>
+
+                <p>
+                    Enterprise editions expose stricter diagnostic-data
+                    policies and a broader set of Group Policy settings. This
+                    can make Enterprise more appropriate for privacy-sensitive
+                    systems that must continue to run Windows.
+                </p>
+
+                <aside class="notice">
+                    <strong>Use a valid licence.</strong>
+                    Changing the installed Windows edition and possessing a
+                    legal licence are separate matters. Use licensing supplied
+                    by your employer, educational institution, authorised
+                    reseller or Microsoft. Edition conversion does not create
+                    a valid Enterprise entitlement.
+                </aside>
+
+                <p>
+                    The practical reason for choosing Enterprise is access to
+                    more administrative controls, not merely the edition name
+                    displayed in System settings.
+                </p>
+            </section>
+
+            <section id="group-policy">
+                <h2>Reduce telemetry through Group Policy</h2>
+
+                <p>
+                    On a supported Windows edition, press
+                    <kbd>Win</kbd> + <kbd>R</kbd>, enter the following command
+                    and press Enter:
+                </p>
+
+                <pre><code>gpedit.msc</code></pre>
+
+                <p>Navigate to:</p>
+
+                <p class="path">
+                    Computer Configuration &gt; Administrative Templates
+                    &gt; Windows Components &gt; Data Collection and
+                    Preview Builds
+                </p>
+
+                <p>
+                    Find <strong>Allow Diagnostic Data</strong> or
+                    <strong>Allow Telemetry</strong>. The exact name depends
+                    on the Windows build. Select the lowest diagnostic level
+                    permitted by your edition and environment.
+                </p>
+
+                <p>Also inspect policy sections relating to:</p>
+
+                <ul>
+                    <li>Cloud Content</li>
+                    <li>Data Collection and Preview Builds</li>
+                    <li>Microsoft Edge</li>
+                    <li>OneDrive</li>
+                    <li>Search</li>
+                    <li>Store</li>
+                    <li>Windows AI</li>
+                    <li>Windows Copilot</li>
+                    <li>Windows Error Reporting</li>
+                    <li>Windows Update</li>
+                    <li>Widgets</li>
+                </ul>
+
+                <p>Useful policies may allow you to disable:</p>
+
+                <ul>
+                    <li>Advertising ID</li>
+                    <li>Automatic feedback requests</li>
+                    <li>Cloud consumer accounts</li>
+                    <li>Consumer experiences</li>
+                    <li>Diagnostic data collection</li>
+                    <li>Feature experimentation</li>
+                    <li>Online tips</li>
+                    <li>Personalised content</li>
+                    <li>Search highlights</li>
+                    <li>Suggested applications</li>
+                    <li>Tailored experiences</li>
+                    <li>Windows Spotlight</li>
+                    <li>Windows tips</li>
+                    <li>Widgets</li>
+                </ul>
+
+                <p>
+                    Policy names and availability change. Review these settings
+                    again after every major Windows feature update.
+                </p>
+            </section>
+
+            <section id="security-trade-offs">
+                <h2>Understand the security and privacy trade-offs</h2>
+
+                <p class="path">
+                    Windows Security &gt; App &amp; browser control &gt;
+                    Reputation-based protection
+                </p>
+
+                <p>
+                    Microsoft Defender SmartScreen checks websites, downloads,
+                    files, applications and potentially unwanted software
+                    against Microsoft's cloud reputation systems.
+                </p>
+
+                <p>Those checks may transmit information such as:</p>
+
+                <ul>
+                    <li>URLs and download sources</li>
+                    <li>File names and cryptographic hashes</li>
+                    <li>Certificate details</li>
+                    <li>Application reputation information</li>
+                    <li>Security-related metadata</li>
+                </ul>
+
+                <p>
+                    SmartScreen can prevent phishing, malicious downloads and
+                    unknown applications before conventional antivirus
+                    signatures detect them. The privacy cost is that Microsoft
+                    receives information about the content being checked.
+                </p>
+
+                <p>
+                    Similar considerations apply to Defender's
+                    cloud-delivered protection and automatic sample
+                    submission. Cloud protection can submit information about
+                    suspicious activity for rapid analysis. Automatic sample
+                    submission may upload suspicious files or portions of
+                    files.
+                </p>
+
+                <aside class="notice warning">
+                    <strong>For most users, retaining these protections is
+                    safer.</strong>
+                    Disabling them may reduce data sent to Microsoft, but it
+                    can also weaken protection against new malware. Make this
+                    decision according to your own threat model rather than
+                    treating it as a universal privacy recommendation.
+                </aside>
+
+                <p>
+                    Disabling cloud protection is especially risky if you
+                    frequently download unfamiliar software, open unexpected
+                    attachments, install game modifications, use untrusted
+                    software sources or run scripts from the internet.
+                </p>
+
+                <p>
+                    If you deliberately disable any cloud-based security
+                    feature, compensate with careful security practices:
+                </p>
+
+                <ul class="checklist">
+                    <li>Keep Defender signatures and Windows updates current</li>
+                    <li>Do not run unknown scripts with administrator rights</li>
+                    <li>Check software publishers and digital signatures</li>
+                    <li>Use more than one scanner for genuinely suspicious files</li>
+                    <li>Maintain tested offline backups</li>
+                    <li>Use a standard account for ordinary work</li>
+                    <li>Show file extensions in File Explorer</li>
+                    <li>Avoid broad Defender exclusions</li>
+                    <li>Use a sandbox or virtual machine for risky files</li>
+                </ul>
+
+                <p>
+                    Privacy matters, but malware that steals documents,
+                    passwords and session cookies is a more serious privacy
+                    failure than routine operating-system telemetry.
+                </p>
+            </section>
+
+            <section id="hosts-file">
+                <h2>Block selected domains through the hosts file</h2>
+
+                <p>
+                    Once Windows settings and policies have been configured,
+                    the hosts file can provide another transparent layer of
+                    control.
+                </p>
+
+                <p>The Windows hosts file is located at:</p>
+
+                <pre><code>C:\Windows\System32\drivers\etc\hosts</code></pre>
+
+                <p>
+                    A hosts entry maps a hostname to a chosen address. Mapping
+                    a domain to <code>0.0.0.0</code> prevents the usual IPv4
+                    connection. Adding a corresponding <code>::</code> entry
+                    covers IPv6 resolution.
+                </p>
+
+                <pre><code>0.0.0.0 telemetry.example.com
+:: telemetry.example.com</code></pre>
+
+                <p>
+                    The hosts file does not support wildcards. Blocking
+                    <code>example.com</code> does not automatically block
+                    <code>data.example.com</code>.
+                </p>
+
+                <p>
+                    It also cannot stop software that uses a hard-coded IP
+                    address, a different hostname, a proxy, encrypted DNS or
+                    its own resolver. It is therefore one useful layer rather
+                    than a complete network-control system.
+                </p>
+
+                <h3>Back up the hosts file</h3>
+
+                <p>
+                    Open Command Prompt as administrator and create a backup:
+                </p>
+
+                <pre><code>copy "%SystemRoot%\System32\drivers\etc\hosts" ^
+"%USERPROFILE%\Desktop\hosts-backup.txt"</code></pre>
+
+                <h3>Edit the file safely</h3>
+
+                <ol>
+                    <li>Open the Start menu.</li>
+                    <li>Search for Notepad.</li>
+                    <li>Right-click Notepad.</li>
+                    <li>Select <strong>Run as administrator</strong>.</li>
+                    <li>Choose <strong>File &gt; Open</strong>.</li>
+                    <li>
+                        Browse to
+                        <code>C:\Windows\System32\drivers\etc</code>.
+                    </li>
+                    <li>
+                        Change the file filter from Text Documents to
+                        All Files.
+                    </li>
+                    <li>Open the file named <code>hosts</code>.</li>
+                    <li>Add the required entries at the bottom.</li>
+                    <li>Save the file.</li>
+                </ol>
+
+                <p>Clear the DNS cache afterwards:</p>
+
+                <pre><code>ipconfig /flushdns</code></pre>
+
+                <p>
+                    Restart applications that were already running because
+                    they may have cached earlier DNS results.
+                </p>
+            </section>
+
+            <section id="block-lists">
+                <h2>Staged Microsoft domain lists</h2>
+
+                <aside class="notice danger">
+                    <strong>Do not apply every list at once.</strong>
+                    Start with the lowest-risk category and test Windows for
+                    several days. Continue only if the features you require
+                    remain operational.
+                </aside>
+
+                <p>
+                    Each list below contains hostnames only. Use the associated
+                    button to generate and copy both the
+                    <code>0.0.0.0</code> and <code>::</code> hosts entries.
+                    The generated text is copied to your clipboard.
+                </p>
+
+                <div class="level">
+                    <span class="risk">Lower risk</span>
+                    <h3>Level 1: Basic telemetry and event collection</h3>
+
+                    <p>
+                        These endpoints are primarily associated with
+                        diagnostics, telemetry, event collection, usage
+                        reporting and test environments.
+                    </p>
+
+                    <p>
+                        Blocking them should not normally prevent activation,
+                        Microsoft account sign-in or ordinary Windows Update
+                        downloads. It may reduce Microsoft's ability to
+                        diagnose faults and measure feature usage.
+                    </p>
+
+                    <div class="button-row">
+                        <button type="button" data-copy="level-1">
+                            Copy Level 1 hosts entries
+                        </button>
+                    </div>
+                    <p class="copy-status" id="status-level-1"
+                       aria-live="polite"></p>
+
+                    <pre id="level-1" data-hosts><code>alpha.telemetry.microsoft.com
+au-v10.events.data.microsoft.com
+au-v20.events.data.microsoft.com
+au.vortex-win.data.microsoft.com
+browser.events.data.msn.com
+de-v20.events.data.microsoft.com
+de.vortex-win.data.microsoft.com
+df.telemetry.microsoft.com
+eu-v10.events.data.microsoft.com
+eu-v10c.events.data.microsoft.com
+eu-v20.events.data.microsoft.com
+eu.vortex-win.data.microsoft.com
+events-sandbox.data.microsoft.com
+events.data.microsoft.com
+jp-v10.events.data.microsoft.com
+jp-v20.events.data.microsoft.com
+onecollector.cloudapp.aria.akadns.net
+self.events.data.microsoft.com
+sqm.df.telemetry.microsoft.com
+sqm.telemetry.microsoft.com
+tele.trafficmanager.net
+telemetry.appex.bing.net
+telemetry.microsoft.com
+telemetry.remoteapp.windowsazure.com
+telemetry.urs.microsoft.com
+uk-v20.events.data.microsoft.com
+uk.vortex-win.data.microsoft.com
+us-v10.events.data.microsoft.com
+us-v10c.events.data.microsoft.com
+us-v20.events.data.microsoft.com
+us.vortex-win.data.microsoft.com
+us4-v20.events.data.microsoft.com
+us5-v20.events.data.microsoft.com
+v10-win.vortex.data.microsoft.com.akadns.net
+v10.events.data.microsoft.com
+v10.vortex-win.data.microsoft.com
+v10c.events.data.microsoft.com
+v10c.vortex-win.data.microsoft.com
+v20.events.data.microsoft.com
+v20.vortex-win.data.microsoft.com
+vortex-sandbox.data.microsoft.com
+vortex-win-sandbox.data.microsoft.com
+vortex-win.data.microsoft.com
+vortex.data.glbdns2.microsoft.com
+vortex.data.microsoft.com</code></pre>
+                </div>
+
+                <div class="level">
+                    <span class="risk">Lower to medium risk</span>
+                    <h3>Level 2: Crash reports, Watson and feedback</h3>
+
+                    <p>
+                        Microsoft Watson is used for crash analysis and error
+                        reporting. Reports may contain diagnostic details,
+                        application state and memory-dump information.
+                    </p>
+
+                    <p>
+                        Blocking these domains should not prevent Windows or
+                        ordinary applications from running, but crash reports,
+                        Feedback Hub and support diagnostics may fail.
+                    </p>
+
+                    <div class="button-row">
+                        <button type="button" data-copy="level-2">
+                            Copy Level 2 hosts entries
+                        </button>
+                    </div>
+                    <p class="copy-status" id="status-level-2"
+                       aria-live="polite"></p>
+
+                    <pre id="level-2" data-hosts><code>ceuswatcab01.blob.core.windows.net
+ceuswatcab02.blob.core.windows.net
+diagnostics.support.microsoft.com
+eaus2watcab01.blob.core.windows.net
+eaus2watcab02.blob.core.windows.net
+eu-watsonc.events.data.microsoft.com
+feedback.microsoft-hohm.com
+feedback.search.microsoft.com
+feedback.windows.com
+kmwatsonc.events.data.microsoft.com
+modern.watson.data.microsoft.com
+modern.watson.data.microsoft.com.akadns.net
+oca.microsoft.com
+oca.telemetry.microsoft.com
+reports.wes.df.telemetry.microsoft.com
+services.wes.df.telemetry.microsoft.com
+survey.watson.microsoft.com
+umwatson.events.data.microsoft.com
+umwatsonc.events.data.microsoft.com
+watson.live.com
+watson.microsoft.com
+watson.ppe.telemetry.microsoft.com
+watson.telemetry.microsoft.com
+watsonc.events.data.microsoft.com
+wes.df.telemetry.microsoft.com
+weus2watcab01.blob.core.windows.net
+weus2watcab02.blob.core.windows.net</code></pre>
+                </div>
+
+                <div class="level">
+                    <span class="risk medium">Medium risk</span>
+                    <h3>Level 3: MSN, Bing, advertising and Widgets</h3>
+
+                    <p>
+                        These domains provide MSN feeds, Bing resources,
+                        promotional material, thumbnails, Widgets and Windows
+                        Spotlight content.
+                    </p>
+
+                    <p>
+                        Possible effects include empty Widgets, missing weather
+                        cards, an incomplete Edge new-tab page, absent
+                        thumbnails and a static lock-screen background.
+                    </p>
+
+                    <div class="button-row">
+                        <button type="button" data-copy="level-3">
+                            Copy Level 3 hosts entries
+                        </button>
+                    </div>
+                    <p class="copy-status" id="status-level-3"
+                       aria-live="polite"></p>
+
+                    <pre id="level-3" data-hosts><code>api.msn.com
+arc.msn.com
+assets.msn.com
+business.bing.com
+c.bing.com
+c.msn.com
+choice.microsoft.com
+creativecdn.com
+edgeassetservice.azureedge.net
+evoke-windowsservices-tas.msedge.net
+fd.api.iris.microsoft.com
+fp-afd-nocache-ccp.azureedge.net
+fp-vs.azureedge.net
+g.msn.com
+ntp.msn.com
+prod-azurecdn-akamai-iris.azureedge.net
+ris.api.iris.microsoft.com
+srtb.msn.com
+staticview.msn.com
+th.bing.com
+tse1.mm.bing.net
+widgetcdn.azureedge.net
+widgetservice.azurefd.net
+www.msn.com</code></pre>
+                </div>
+
+                <div class="level">
+                    <span class="risk medium">Medium risk</span>
+                    <h3>Level 4: Location, Maps, Weather and activity</h3>
+
+                    <p>
+                        These endpoints support genuine Windows functions.
+                        Block them only if you do not use the corresponding
+                        features.
+                    </p>
+
+                    <p>Possible effects include problems with:</p>
+
+                    <ul>
+                        <li>Automatic location detection</li>
+                        <li>Automatic time-zone selection</li>
+                        <li>Find My Device</li>
+                        <li>Maps and Weather</li>
+                        <li>Applications requesting Windows location data</li>
+                        <li>OneNote resources</li>
+                        <li>Activity and connected-device synchronisation</li>
+                    </ul>
+
+                    <div class="button-row">
+                        <button type="button" data-copy="level-4">
+                            Copy Level 4 hosts entries
+                        </button>
+                    </div>
+                    <p class="copy-status" id="status-level-4"
+                       aria-live="polite"></p>
+
+                    <pre id="level-4" data-hosts><code>activity.windows.com
+assets.activity.windows.com
+cdn.onenote.net
+ecn.dev.virtualearth.net
+ecn-us.dev.virtualearth.net
+edge.activity.windows.com
+inference.location.live.net
+location-inference-westus.cloudapp.net
+maps.windows.com
+tile-service.weather.microsoft.com
+weathermapdata.blob.core.windows.net</code></pre>
+                </div>
+
+                <div class="level">
+                    <span class="risk medium">Medium risk</span>
+                    <h3>Level 5: Edge configuration and experiments</h3>
+
+                    <p>
+                        These endpoints appear to support Edge configuration,
+                        staged feature deployment, experiments, fallback
+                        services and Microsoft-delivered browser content.
+                    </p>
+
+                    <p>
+                        Blocking them is most appropriate when Edge is not your
+                        primary browser. Windows applications may still use
+                        Edge WebView2, so test those applications afterwards.
+                    </p>
+
+                    <div class="button-row">
+                        <button type="button" data-copy="level-5">
+                            Copy Level 5 hosts entries
+                        </button>
+                    </div>
+                    <p class="copy-status" id="status-level-5"
+                       aria-live="polite"></p>
+
+                    <pre id="level-5" data-hosts><code>a-ring-fallback.msedge.net
+c-ring.msedge.net
+config.edge.skype.com
+dual-s-ring.msedge.net
+fp.msedge.net
+i-ring.msedge.net
+ln-ring.msedge.net
+s-ring.msedge.net
+t-ring.msedge.net
+t-ring-fdv2.msedge.net</code></pre>
+                </div>
+
+                <div class="level">
+                    <span class="risk high">High risk</span>
+                    <h3>Level 6: Cloud settings and functional events</h3>
+
+                    <p>
+                        These endpoints may be involved in remote
+                        configuration, feature flags, experiments, telemetry
+                        instructions and functional-event processing.
+                    </p>
+
+                    <p>
+                        Blocking them may reduce remote configuration activity,
+                        but it can also make cloud-managed Windows components
+                        behave unpredictably.
+                    </p>
+
+                    <div class="button-row">
+                        <button type="button" data-copy="level-6">
+                            Copy Level 6 hosts entries
+                        </button>
+                    </div>
+                    <p class="copy-status" id="status-level-6"
+                       aria-live="polite"></p>
+
+                    <pre id="level-6" data-hosts><code>asimov-win.settings.data.microsoft.com.akadns.net
+co4.telecommand.telemetry.microsoft.com
+cy2.settings.data.microsoft.com.akadns.net
+cy2.vortex.data.microsoft.com.akadns.net
+db5-eap.settings-win.data.microsoft.com.akadns.net
+db5.settings-win.data.microsoft.com.akadns.net
+db5.vortex.data.microsoft.com.akadns.net
+functional.events.data.microsoft.com
+geo.settings-win.data.microsoft.com.akadns.net
+geo.vortex.data.microsoft.com.akadns.net
+query.prod.cms.rt.microsoft.com
+settings-sandbox.data.microsoft.com
+settings-win.data.microsoft.com
+settings.data.glbdns2.microsoft.com
+settings.data.microsoft.com
+telecommand.telemetry.microsoft.com
+www.telecommandsvc.microsoft.com</code></pre>
+                </div>
+
+                <div class="level">
+                    <span class="risk medium">Medium risk</span>
+                    <h3>Level 7: Statistics and traffic management</h3>
+
+                    <p>
+                        These hostnames are associated with statistics, content
+                        delivery and traffic-management infrastructure.
+                    </p>
+
+                    <p>
+                        A hostname such as
+                        <code>statsfe2.update.microsoft.com</code> is more
+                        likely to support reporting around updates than to host
+                        the update packages themselves. Blocking it should not
+                        be described as equivalent to disabling Windows
+                        Update.
+                    </p>
+
+                    <p>
+                        Nevertheless, these blocks may affect download
+                        coordination, traffic shaping or service reporting.
+                    </p>
+
+                    <div class="button-row">
+                        <button type="button" data-copy="level-7">
+                            Copy Level 7 hosts entries
+                        </button>
+                    </div>
+                    <p class="copy-status" id="status-level-7"
+                       aria-live="polite"></p>
+
+                    <pre id="level-7" data-hosts><code>cs11.wpc.v0cdn.net
+cs1137.wpc.gammacdn.net
+statsfe1.ws.microsoft.com
+statsfe2.update.microsoft.com.akadns.net
+statsfe2.ws.microsoft.com
+tsfe.trafficshaping.dsp.mp.microsoft.com</code></pre>
+                </div>
+
+                <div class="level">
+                    <span class="risk high">Very high risk</span>
+                    <h3>Level 8: Device registration endpoints</h3>
+
+                    <p>
+                        This is one of the most aggressive categories. These
+                        domains may support device registration, Microsoft
+                        account integration, Entra ID, Autopilot, connected
+                        experiences and persistent device identification.
+                    </p>
+
+                    <p>Possible effects include:</p>
+
+                    <ul>
+                        <li>Device-registration failures</li>
+                        <li>Broken work or school enrolment</li>
+                        <li>Entra ID errors</li>
+                        <li>Autopilot deployment failures</li>
+                        <li>Account synchronisation problems</li>
+                        <li>Microsoft account warnings</li>
+                        <li>Unavailable connected-device features</li>
+                    </ul>
+
+                    <aside class="notice danger">
+                        Do not apply this list to a work-managed computer
+                        without approval from the organisation responsible for
+                        the device.
+                    </aside>
+
+                    <div class="button-row">
+                        <button type="button" data-copy="level-8">
+                            Copy Level 8 hosts entries
+                        </button>
+                    </div>
+                    <p class="copy-status" id="status-level-8"
+                       aria-live="polite"></p>
+
+                    <pre id="level-8" data-hosts><code>aad.cs.dds.microsoft.com
+cdpcs.access.microsoft.com
+cs.dds.microsoft.com
+dds.microsoft.com
+fd.dds.microsoft.com
+mucp.api.account.microsoft.com
+ztd.dds.microsoft.com</code></pre>
+                </div>
+
+                <div class="level">
+                    <span class="risk high">Extreme risk</span>
+                    <h3>Level 9: Microsoft account authentication</h3>
+
+                    <p>
+                        These are Microsoft account authentication endpoints.
+                        Blocking them may be appropriate only for a deliberately
+                        local-only system on which Microsoft account services
+                        are not required.
+                    </p>
+
+                    <p>Blocking them can interfere with:</p>
+
+                    <ul>
+                        <li>Microsoft account sign-in</li>
+                        <li>Microsoft Store authentication</li>
+                        <li>Microsoft 365</li>
+                        <li>OneDrive</li>
+                        <li>Outlook</li>
+                        <li>Xbox services</li>
+                        <li>Account-based licence checks</li>
+                        <li>Account recovery</li>
+                        <li>Work or school authentication</li>
+                    </ul>
+
+                    <div class="button-row">
+                        <button type="button" data-copy="level-9">
+                            Copy Level 9 hosts entries
+                        </button>
+                    </div>
+                    <p class="copy-status" id="status-level-9"
+                       aria-live="polite"></p>
+
+                    <pre id="level-9" data-hosts><code>account.live.com
+login.live.com</code></pre>
+                </div>
+            </section>
+
+            <section id="testing">
+                <h2>Test each block before continuing</h2>
+
+                <p>
+                    Add one category at a time. Begin with basic telemetry and
+                    crash reporting, then use the computer normally for
+                    several days before adding another category.
+                </p>
+
+                <p>After every change, test:</p>
+
+                <ul>
+                    <li>Windows activation</li>
+                    <li>Windows Update</li>
+                    <li>Defender security intelligence updates</li>
+                    <li>Microsoft Store</li>
+                    <li>Microsoft 365</li>
+                    <li>OneDrive</li>
+                    <li>VPN software</li>
+                    <li>Work or school accounts</li>
+                    <li>WebView2-based applications</li>
+                    <li>Your preferred browser</li>
+                    <li>Any Microsoft application you still use</li>
+                </ul>
+
+                <p>
+                    Test DNS resolution from PowerShell:
+                </p>
+
+                <pre><code>Resolve-DnsName telemetry.microsoft.com</code></pre>
+
+                <p>You can also try:</p>
+
+                <pre><code>ping telemetry.microsoft.com</code></pre>
+
+                <p>
+                    A hostname blocked through the hosts file should resolve
+                    to <code>0.0.0.0</code> or <code>::</code>, depending on
+                    the address family selected by Windows.
+                </p>
+
+                <p>
+                    If a required feature stops working, remove the entries
+                    from the most recently added category and clear the DNS
+                    cache:
+                </p>
+
+                <pre><code>ipconfig /flushdns</code></pre>
+
+                <h3>Restore the original hosts file</h3>
+
+                <p>
+                    If you created the suggested desktop backup, open Command
+                    Prompt as administrator and run:
+                </p>
+
+                <pre><code>copy /y "%USERPROFILE%\Desktop\hosts-backup.txt" ^
+"%SystemRoot%\System32\drivers\etc\hosts"
+
+ipconfig /flushdns</code></pre>
+            </section>
+
+            <section id="maintenance">
+                <h2>Windows privacy requires regular maintenance</h2>
+
+                <p>
+                    Windows 11 does not provide one master switch that disables
+                    every unnecessary form of data collection. An effective
+                    configuration uses several layers.
+                </p>
+
+                <ul class="checklist">
+                    <li>Use Brave or Firefox instead of Edge where practical</li>
+                    <li>Use a local Windows account where possible</li>
+                    <li>Remove applications you do not require</li>
+                    <li>Disable unwanted Copilot and AI features</li>
+                    <li>Turn off Widgets, MSN feeds and personalised content</li>
+                    <li>Choose the lowest available diagnostic-data level</li>
+                    <li>Use Group Policy for stronger administrative control</li>
+                    <li>Disable cloud integrations you do not use</li>
+                    <li>Evaluate cloud security features using your threat model</li>
+                    <li>Block selected telemetry domains in controlled stages</li>
+                    <li>Review the entire configuration after major updates</li>
+                </ul>
+
+                <p>
+                    Microsoft continually changes Windows. New endpoints
+                    appear, old domains disappear, settings move and removed
+                    applications may return after feature updates.
+                </p>
+
+                <p>
+                    The objective is not to block every Microsoft server or to
+                    damage useful Windows functions. It is to remove
+                    unnecessary data collection while preserving the services
+                    and security protections you genuinely need.
+                </p>
+
+                <p>
+                    Windows 11 is designed around cloud connectivity and
+                    continuous communication. If you must use it, however,
+                    accepting every default setting is not your only option.
+                </p>
+            </section>
+
+            <section id="faq">
+                <h2>Frequently asked questions</h2>
+
+                <details>
+                    <summary>
+                        Can Windows 11 be made completely private?
+                    </summary>
+                    <div>
+                        <p>
+                            Not realistically while it remains connected to
+                            Microsoft services. Privacy settings, Group Policy
+                            and network blocking can substantially reduce data
+                            collection, but they cannot guarantee that no data
+                            leaves the computer.
+                        </p>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>
+                        Will these hosts entries disable Windows Update?
+                    </summary>
+                    <div>
+                        <p>
+                            The lower-level lists are not intended to block
+                            normal update payloads. More aggressive lists can
+                            still affect related configuration, reporting or
+                            account services. Always test Windows Update after
+                            making changes.
+                        </p>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>
+                        Is a local account enough to stop telemetry?
+                    </summary>
+                    <div>
+                        <p>
+                            No. A local account reduces the direct association
+                            between the Windows profile and a Microsoft
+                            identity, but the operating system can continue to
+                            send diagnostic and service data.
+                        </p>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>
+                        Should SmartScreen be disabled for privacy?
+                    </summary>
+                    <div>
+                        <p>
+                            Most users should retain SmartScreen because it
+                            provides meaningful protection against malicious
+                            websites, downloads and unfamiliar applications.
+                            Disabling it is an individual privacy and security
+                            trade-off, not a general recommendation.
+                        </p>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>
+                        Can these changes be reversed?
+                    </summary>
+                    <div>
+                        <p>
+                            Yes. Re-enable the relevant Windows settings or
+                            policies, remove the hosts entries and flush the
+                            DNS cache. Keeping a backup of the original hosts
+                            file makes recovery much easier.
+                        </p>
+                    </div>
+                </details>
+            </section>
+        </article>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <p>
+                This guide is provided for educational purposes. Microsoft,
+                Windows, Edge, Defender, Entra and related names are
+                trademarks of their respective owners.
+            </p>
+
+            <p>
+                Always maintain current backups and comply with your
+                organisation's security, licensing and device-management
+                policies.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        "use strict";
+
+        function buildHostsEntries(element) {
+            const hostnames = element.textContent
+                .split(/\r?\n/)
+                .map((hostname) => hostname.trim())
+                .filter(Boolean);
+
+            return hostnames
+                .flatMap((hostname) => [
+                    "0.0.0.0 " + hostname,
+                    ":: " + hostname
+                ])
+                .join("\n");
+        }
+
+        async function copyHostsEntries(targetId, button) {
+            const target = document.getElementById(targetId);
+            const status = document.getElementById(
+                "status-" + targetId
+            );
+
+            if (!target || !status) {
+                return;
+            }
+
+            const output = buildHostsEntries(target);
+
+            try {
+                await navigator.clipboard.writeText(output);
+                status.textContent =
+                    "Copied " + output.split("\n").length +
+                    " hosts entries to the clipboard.";
+                button.textContent = "Copied";
+            } catch (error) {
+                status.textContent =
+                    "Automatic copying was blocked. Select and copy the " +
+                    "hostnames manually, adding 0.0.0.0 and :: entries.";
+            }
+
+            window.setTimeout(() => {
+                button.textContent =
+                    "Copy " +
+                    targetId.replace("-", " ").replace("level", "Level") +
+                    " hosts entries";
+            }, 2500);
+        }
+
+        document.querySelectorAll("[data-copy]").forEach((button) => {
+            button.addEventListener("click", () => {
+                copyHostsEntries(button.dataset.copy, button);
+            });
+        });
+    </script>
+</body>
+</html>
